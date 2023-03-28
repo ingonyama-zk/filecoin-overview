@@ -18,6 +18,9 @@ let SealPreCommitPhase1Output {
 
 TODO: write about vanilla proofs
 
+
+> Here you can find a visual explination of the tree constuction process: [figma](https://www.figma.com/file/VsodxV0DxhCevtmJIPoe57/Filecoin-tree-details?node-id=0-1&t=kA1ATuksTEKT4cwr-0)
+
 ## tree_c
 
 `Tree_c` is generated [here](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1353) and depends on the [layer arity](https://github.com/filecoin-project/rust-fil-proofs/blob/1680ad08f607512e0c2f9d13c330d07f2b2ca081/filecoin-proofs/src/constants.rs#L108) for choosing the `ColumnArity` and `TreeArity`.
@@ -54,3 +57,19 @@ create_disk_tree::<DiskTree<Tree::Hasher, Tree::Arity, Tree::SubTreeArity, Tree:
 ```
 
 At this stage the root of the final tree is calculated and we have a complete tree persisted on disk.
+
+
+## tree_d
+`Tree_d` is originally construcuted in PC1 phase. However if not found in PC2 phase `tree_d` will be [consturcted](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1389) as part of PC2 phase.
+
+
+## tree_r_last
+
+`tree_r_last` is constructed from the very last layer found in the replica [(layer 11)](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1424).
+
+`tree_r_last` can also be constructed usign eather GPU or CPU. Im more familer with the GPU implementation and will cover it.
+
+- Layer 11 is split into chunks of [700k elements](https://github.com/filecoin-project/rust-fil-proofs/blob/64c03eb9bf6ceed1a788e51ae9669e58cba2d977/storage-proofs-core/src/settings.rs#L44).
+- These chuncks are then hashed by Poseidon(8 + 1) -> 1.
+- The trees are constructed using a [TreeBuilder](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1086)
+- Finally the complete tree is [persisted to disk](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1123).
