@@ -4,3 +4,4 @@ We will cover these processes at the level of [rust-fil-proofs](https://github.c
 
 ### Directory
 - [seal_pre_commit_phase2](https://github.com/ingonyama-zk/filecoin-overview/blob/main/SealingProcesses/PreCommit2.md)
+- [seal_commit_phase2](https://github.com/ingonyama-zk/filecoin-overview/blob/main/SealingProcesses/Commit2.md)
