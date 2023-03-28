@@ -5,4 +5,4 @@ Out goal is to make these complex systems easier to dive into.
 
 
 ## directory
-[Sealing processes](www.google.com)
+[Sealing processes](https://github.com/ingonyama-zk/filecoin-overview/tree/main/SealingProcesses)
