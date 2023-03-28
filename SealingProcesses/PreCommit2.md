@@ -42,7 +42,7 @@ configs: Vec<StoreConfig>
 labels: &LabelsCache<Tree>
 ```
 
-To understand how trees are constructed in filecoin please read [this](https://github.com/mylink).
+> To understand how trees are constructed in filecoin please read [this](https://github.com/ingonyama-zk/filecoin-overview/blob/main/SealingProcesses/Abitontrees.md).
 
 - First we [allocate](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L785) a Vec to store the tree in.
 - Depending on the `nodes_count` and `num_cpus::get()` we generate [chunck sizes](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L795) in which we shall process the data.
