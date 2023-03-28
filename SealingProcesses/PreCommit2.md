@@ -1,6 +1,6 @@
 ## Precommit2
 
-[seal_pre_commit_phase2](https://github.com/filecoin-project/rust-fil-proofs/blob/bdb7c4261e770e70dc2c93cef9f73109f06354b6/filecoin-proofs/src/api/seal.rs#L214) generates three trees `tree_c`, `tree_d`, `tree_r_last`. 
+[seal_pre_commit_phase2](https://github.com/filecoin-project/rust-fil-proofs/blob/bdb7c4261e770e70dc2c93cef9f73109f06354b6/filecoin-proofs/src/api/seal.rs#L214) generates three trees `tree_c`, `tree_d`, `tree_r_last` and `comm_r`. 
 
 
 `seal_pre_commit_phase2` recives [SealPreCommitPhase1Output](https://github.com/filecoin-project/rust-fil-proofs/blob/415f9d2ea7967a0ca20f49361cc045469b454921/filecoin-proofs/src/types/mod.rs#L81) as input this includes:
@@ -73,3 +73,8 @@ At this stage the root of the final tree is calculated and we have a complete tr
 - These chuncks are then hashed by Poseidon(8 + 1) -> 1.
 - The trees are constructed using a [TreeBuilder](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1086)
 - Finally the complete tree is [persisted to disk](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1123).
+
+
+## Comm_r
+
+[comm_r](https://github.com/filecoin-project/rust-fil-proofs/blob/128f7209ec583e023f04630102ef1dd17fbe2370/storage-proofs-porep/src/stacked/vanilla/proof.rs#L1437) is simply a sha256 hash of `tree_c_root` and `tree_r_last_root`.
